@@ -19,5 +19,10 @@
         </tr>
     {% endfor %}
 </table>
+{% comment %} cookie {% endcomment %}
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+
+{% comment %} Logout button {% endcomment %}
+<button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
 
 {% endblock content %}
