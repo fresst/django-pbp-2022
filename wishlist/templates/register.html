@@ -6,13 +6,13 @@
 
 {% block content %}  
 
-<div class = "login">
+<div class = "register" style="padding: 50px 30px">
     
-    <h1>Formulir Registrasi</h1>  
+    <h1 style="text-align:center; padding:2px">Formulir Registrasi</h1>  
 
         <form method="POST" >  
             {% csrf_token %}  
-            <table>  
+            <table style="width:100%; margin:20px">  
                 {{ form.as_table }}  
                 <tr>  
                     <td></td>

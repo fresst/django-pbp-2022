@@ -6,28 +6,24 @@
 
 {% block content %}
 
-<div class = "login">
+<div class = "container-md" style="width: 320px; padding-top: 50px">
 
-    <h1>Login</h1>
-
+    <h1 style="text-align: center">Login</h1>
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
+            <div class="form-group">
+                <label style="padding-top: 10px">Username</label>
+                <input type="text" name="username" placeholder="Username" class="form-control">
+            </div>
                     
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+            <div class="form-group">
+                <label style="padding-top: 10px">Password</label>
+                <input type="password" name="password" placeholder="Password" class="form-control">
+            </div>
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
+            <div style="text-align:center">
+            <button class="btn btn-primary" type="submit" style="margin-top: 10px"> Login </button>
+            </div>
     </form>
 
     {% if messages %}
@@ -37,9 +33,9 @@
             {% endfor %}
         </ul>
     {% endif %}     
-        
-    Belum mempunyai akun? <a href="{% url 'wishlist:register' %}">Buat Akun</a>
-
+</div>
+<div style="padding-top: 30px; text-align:center">
+    Belum mempunyai akun? <a class="btn btn-outline-secondary btn-sm" href="{% url 'wishlist:register' %}" role="button">Buat Akun</a>
 </div>
 
 {% endblock content %}
