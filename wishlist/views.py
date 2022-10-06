@@ -7,7 +7,7 @@ from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from wishlist.models import BarangWishlist
+from wishlist.models import AddWishlistForm, BarangWishlist
 
 # Create your views here.
 # Lab 1
@@ -79,3 +79,36 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('wishlist:login'))
     response.delete_cookie('last_login') # deleting cookie
     return redirect('wishlist:login')
+
+# Lab 5
+@login_required(login_url='/wishlist/login/')
+def show_ajax(request):
+    # tampilin barang
+    data_barang_wishlist = BarangWishlist.objects.all()
+    user_name = request.user.username    
+    context = {
+        'list_barang': data_barang_wishlist,
+        'nama': user_name,
+        'last_login' : request.COOKIES['last_login'],
+    }
+    return render(request, "wishlist_ajax.html", context)
+
+@login_required(login_url='/wishlist/login/')
+def submit_wishlist(request):
+    # input form
+    form = AddWishlistForm()
+    if(request.method == 'POST'):
+        get_user = request.user
+        get_nama = request.POST.get('nama_barang')
+        get_harga = request.POST.get('harga_barang')
+        get_deskripsi = request.POST.get('deskripsi')
+        
+        new_wishlist = BarangWishlist(
+            user = get_user,
+            nama_barang = get_nama,
+            harga_barang = get_harga,
+            deskripsi = get_deskripsi
+        )
+        
+        new_wishlist.save()
+    return render(request, "wishlist_ajax.html")
